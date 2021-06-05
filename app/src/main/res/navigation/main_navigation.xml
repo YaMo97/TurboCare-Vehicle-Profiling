@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/vehicleListFragment">
+
+    <fragment
+        android:id="@+id/vehicleListFragment"
+        android:name="com.turbocare.vehicleprofiling.ui.profile.list.VehicleListFragment"
+        android:label="@string/vehicle_list_fragment"
+        tools:layout="@layout/vehicle_list_fragment" >
+        <action
+            android:id="@+id/action_vehicleListFragment_to_vehicleProfileFragment"
+            app:destination="@id/vehicleProfileFragment"
+            app:popUpTo="@id/vehicleListFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_vehicleListFragment_to_create_profile_group"
+            app:destination="@id/create_profile_group" />
+    </fragment>
+    <fragment
+        android:id="@+id/vehicleProfileFragment"
+        android:name="com.turbocare.vehicleprofiling.ui.profile.details.VehicleProfileFragment"
+        android:label="@string/vehicle_profile_fragment"
+        tools:layout="@layout/vehicle_profile_fragment" />
+    <navigation android:id="@+id/create_profile_group"
+        app:startDestination="@id/newVehicleFragment">
+        <fragment
+            android:id="@+id/vehicleFuelTypeFragment"
+            android:name="com.turbocare.vehicleprofiling.ui.profile.create.fuelType.VehicleFuelTypeFragment"
+            android:label="@string/vehicle_fuel_type_fragment"
+            tools:layout="@layout/vehicle_fuel_type_fragment" >
+            <action
+                android:id="@+id/action_vehicleFuelTypeFragment_to_vehicleTransmissionFragment"
+                app:destination="@id/vehicleTransmissionFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/newVehicleFragment"
+            android:name="com.turbocare.vehicleprofiling.ui.profile.create.registration.NewVehicleFragment"
+            android:label="@string/new_vehicle_fragment"
+            tools:layout="@layout/new_vehicle_fragment" >
+            <action
+                android:id="@+id/action_newVehicleFragment_to_vehicleClassFragment"
+                app:destination="@id/vehicleClassFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/vehicleClassFragment"
+            android:name="com.turbocare.vehicleprofiling.ui.profile.create.vehicleClass.VehicleClassFragment"
+            android:label="@string/vehicle_class_fragment"
+            tools:layout="@layout/vehicle_class_fragment" >
+            <action
+                android:id="@+id/action_vehicleClassFragment_to_vehicleMakeFragment"
+                app:destination="@id/vehicleMakeFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/vehicleMakeFragment"
+            android:name="com.turbocare.vehicleprofiling.ui.profile.create.make.VehicleMakeFragment"
+            android:label="@string/vehicle_make_fragment"
+            tools:layout="@layout/vehicle_make_fragment" >
+            <action
+                android:id="@+id/action_vehicleMakeFragment_to_vehicleModelFragment"
+                app:destination="@id/vehicleModelFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/vehicleModelFragment"
+            android:name="com.turbocare.vehicleprofiling.ui.profile.create.model.VehicleModelFragment"
+            android:label="@string/vehicle_model_fragment"
+            tools:layout="@layout/vehicle_model_fragment" >
+            <action
+                android:id="@+id/action_vehicleModelFragment_to_vehicleFuelTypeFragment"
+                app:destination="@id/vehicleFuelTypeFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/vehicleTransmissionFragment"
+            android:name="com.turbocare.vehicleprofiling.ui.profile.create.transmission.VehicleTransmissionFragment"
+            android:label="@string/vehicle_transmission_fragment"
+            tools:layout="@layout/vehicle_transmission_fragment" />
+        <action
+            android:id="@+id/action_global_vehicleProfileFragment"
+            app:destination="@id/vehicleProfileFragment"
+            app:popUpTo="@id/vehicleListFragment"
+            app:popUpToInclusive="false" />
+    </navigation>
+</navigation>

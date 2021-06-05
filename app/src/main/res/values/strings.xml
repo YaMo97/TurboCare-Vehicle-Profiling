@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Vehicle Profiling</string>
+
+    <!-- Destination labels -->
+    <string name="vehicle_list_fragment">Vehicles</string>
+    <string name="vehicle_profile_fragment">Vehicle Profile</string>
+    <string name="new_vehicle_fragment">Create new vehicle profile</string>
+    <string name="vehicle_class_fragment">Select vehicle class</string>
+    <string name="vehicle_make_fragment">Select Make</string>
+    <string name="vehicle_model_fragment">Select Model</string>
+    <string name="vehicle_fuel_type_fragment">Select Fuel Type</string>
+    <string name="vehicle_transmission_fragment">Select Transmission</string>
 </resources>
