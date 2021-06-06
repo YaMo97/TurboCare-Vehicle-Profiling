@@ -1,17 +1,19 @@
 package com.turbocare.vehicleprofiling.data.repository
 
-import com.turbocare.vehicleprofiling.data.datasource.VehicleDataSource
+import com.turbocare.vehicleprofiling.data.datasource.LocalVehicleDataSource
+import com.turbocare.vehicleprofiling.data.datasource.RemoteVehicleDataSource
 import com.turbocare.vehicleprofiling.data.model.VehicleClass
 import com.turbocare.vehicleprofiling.data.model.VehicleProfile
 
 class VehicleRepositoryImpl(
-    private val remoteVehicleDataSource: VehicleDataSource,
-    private val localVehicleDataSource: VehicleDataSource
+    private val remoteVehicleDataSource: RemoteVehicleDataSource,
+    private val localVehicleDataSource: LocalVehicleDataSource
 ): VehicleRepository {
 
     override suspend fun getListOfMakes(vehicleClass: VehicleClass): List<String> {
         return localVehicleDataSource.getListOfMakes(vehicleClass)
             ?: remoteVehicleDataSource.getListOfMakes(vehicleClass)
+                ?.also { localVehicleDataSource.saveListOfMakes(it) }
             ?: emptyList()
     }
 
@@ -21,17 +23,20 @@ class VehicleRepositoryImpl(
     ): List<String> {
         return localVehicleDataSource.getListOfModels(vehicleClass, vehicleMake)
             ?: remoteVehicleDataSource.getListOfModels(vehicleClass, vehicleMake)
+                ?.also { localVehicleDataSource.saveListOfModels(vehicleClass, it) }
             ?: emptyList()
     }
 
     override suspend fun getVehicleProfilesList(): List<VehicleProfile> {
         return localVehicleDataSource.getVehicleProfilesList()
             ?: remoteVehicleDataSource.getVehicleProfilesList()
+                ?.also { localVehicleDataSource.saveVehicleProfilesList(it) }
             ?: emptyList()
     }
 
-    override suspend fun getVehicleProfileDetails(profileID: String): VehicleProfile? {
-        return localVehicleDataSource.getVehicleProfileDetails(profileID)
-            ?: remoteVehicleDataSource.getVehicleProfileDetails(profileID)
+    override suspend fun getVehicleProfileDetails(registrationNumber: String): VehicleProfile? {
+        return localVehicleDataSource.getVehicleProfileDetails(registrationNumber)
+            ?: remoteVehicleDataSource.getVehicleProfileDetails(registrationNumber)
+                ?.also { localVehicleDataSource.saveVehicleProfileDetails(it) }
     }
 }

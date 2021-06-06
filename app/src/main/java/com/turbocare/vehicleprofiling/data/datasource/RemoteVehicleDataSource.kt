@@ -3,7 +3,7 @@ package com.turbocare.vehicleprofiling.data.datasource
 import com.turbocare.vehicleprofiling.data.model.VehicleClass
 import com.turbocare.vehicleprofiling.data.model.VehicleProfile
 
-interface VehicleDataSource {
+interface RemoteVehicleDataSource {
 
     suspend fun getListOfMakes(vehicleClass: VehicleClass): List<String>?
 

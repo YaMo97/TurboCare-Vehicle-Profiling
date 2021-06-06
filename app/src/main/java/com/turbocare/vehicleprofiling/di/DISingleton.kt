@@ -1,10 +1,12 @@
 package com.turbocare.vehicleprofiling.di
 
 import android.content.Context
-import com.turbocare.vehicleprofiling.app.App
-import com.turbocare.vehicleprofiling.data.database.LocalVehicleDataSource
-import com.turbocare.vehicleprofiling.data.datasource.VehicleDataSource
-import com.turbocare.vehicleprofiling.data.network.RemoteVehicleDataSource
+import androidx.room.Room
+import com.turbocare.vehicleprofiling.data.database.room.AppDatabase
+import com.turbocare.vehicleprofiling.data.database.LocalVehicleDataSourceImpl
+import com.turbocare.vehicleprofiling.data.datasource.LocalVehicleDataSource
+import com.turbocare.vehicleprofiling.data.datasource.RemoteVehicleDataSource
+import com.turbocare.vehicleprofiling.data.network.RemoteVehicleDataSourceImpl
 import com.turbocare.vehicleprofiling.data.repository.VehicleRepository
 import com.turbocare.vehicleprofiling.data.repository.VehicleRepositoryImpl
 
@@ -15,14 +17,21 @@ import com.turbocare.vehicleprofiling.data.repository.VehicleRepositoryImpl
  * This is a simple workaround to a proper Dependency Injection Implementation
  */
 
-class DISingleton(private val applicationContext: Context) {
+class DISingleton(applicationContext: Context) {
 
     init {
         instance = this
     }
 
-    val remoteVehicleDataSource: VehicleDataSource = RemoteVehicleDataSource()
-    val localVehicleDataSource: VehicleDataSource = LocalVehicleDataSource()
+    private val appDatabase = Room.databaseBuilder(
+        applicationContext,
+        AppDatabase::class.java,
+        "vehicles-db"
+    ).build()
+
+
+    private val remoteVehicleDataSource: RemoteVehicleDataSource = RemoteVehicleDataSourceImpl()
+    private val localVehicleDataSource: LocalVehicleDataSource = LocalVehicleDataSourceImpl(appDatabase)
 
     val vehicleRepository: VehicleRepository = VehicleRepositoryImpl(
         remoteVehicleDataSource,
@@ -42,6 +51,4 @@ class DISingleton(private val applicationContext: Context) {
         fun getInstance(): DISingleton = instance
             ?: throw NullPointerException("Please call initialize() before getting the instance.");
     }
-
-
 }

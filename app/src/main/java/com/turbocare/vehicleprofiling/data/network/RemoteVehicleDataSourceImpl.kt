@@ -1,18 +1,17 @@
 package com.turbocare.vehicleprofiling.data.network
 
 import com.turbocare.vehicleprofiling.BuildConfig
-import com.turbocare.vehicleprofiling.data.datasource.VehicleDataSource
+import com.turbocare.vehicleprofiling.data.datasource.RemoteVehicleDataSource
 import com.turbocare.vehicleprofiling.data.model.VehicleClass
 import com.turbocare.vehicleprofiling.data.model.VehicleProfile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RemoteVehicleDataSource : VehicleDataSource {
+class RemoteVehicleDataSourceImpl : RemoteVehicleDataSource {
 
     override suspend fun getListOfMakes(vehicleClass: VehicleClass): List<String>? {
 
