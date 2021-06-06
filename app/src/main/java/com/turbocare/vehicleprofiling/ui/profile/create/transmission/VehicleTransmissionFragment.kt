@@ -39,7 +39,7 @@ class VehicleTransmissionFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(CreateProfileViewModel::class.java)
 
-        binding?.button?.setOnClickListener { onItemSelected(Transmission.MANUAL) }
+//        binding?.button?.setOnClickListener { onItemSelected(Transmission.MANUAL) }
     }
 
     override fun onDestroyView() {

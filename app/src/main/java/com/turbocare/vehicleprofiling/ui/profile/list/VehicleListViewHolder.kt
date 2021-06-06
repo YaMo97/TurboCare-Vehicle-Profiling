@@ -6,7 +6,8 @@ import com.turbocare.vehicleprofiling.R
 import com.turbocare.vehicleprofiling.data.model.VehicleProfile
 import com.turbocare.vehicleprofiling.ui.base.BaseRecyclerViewHolder
 
-class VehicleListViewHolder(itemView: View): BaseRecyclerViewHolder<VehicleProfile>(itemView) {
+class VehicleListViewHolder(itemView: View, onItemClickListener: OnItemClickListener)
+    : BaseRecyclerViewHolder<VehicleProfile>(itemView, onItemClickListener) {
 
 //    private val textView: TextView = itemView.findViewById(R.id.item_layout_text)
 

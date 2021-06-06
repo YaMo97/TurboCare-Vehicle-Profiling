@@ -18,9 +18,6 @@ interface VehicleProfileDao {
     @Query("SELECT * FROM vehicle_profiles")
     suspend fun getAllVehicleProfiles(): List<VehicleProfile>
 
-    @Delete
-    suspend fun deleteVehicleProfile(registrationNumber: String)
-
     @Query("DELETE FROM vehicle_profiles")
     suspend fun nukeTable()
 }

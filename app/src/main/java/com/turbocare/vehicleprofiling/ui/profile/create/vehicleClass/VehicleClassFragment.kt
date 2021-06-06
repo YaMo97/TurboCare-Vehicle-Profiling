@@ -32,7 +32,7 @@ class VehicleClassFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.button?.setOnClickListener { navigateToNextStep() }
+//        binding?.button?.setOnClickListener { navigateToNextStep() }
     }
 
     override fun onDestroyView() {

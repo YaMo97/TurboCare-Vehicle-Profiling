@@ -44,13 +44,13 @@ class VehicleListFragment : Fragment() {
 
         val list = emptyList<VehicleProfile>()
 
-        var adapter = object : GenericRecyclerViewAdapter<VehicleProfile>(list) {
-            override fun getLayoutId(position: Int, obj: VehicleProfile): Int =
-                R.layout.vehicle_list_fragment
-
-            override fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder =
-                VehicleListViewHolder(view)
-        }
+//        var adapter = object : GenericRecyclerViewAdapter<VehicleProfile>(list) {
+//            override fun getLayoutId(position: Int, obj: VehicleProfile): Int =
+//                R.layout.vehicle_list_fragment
+//
+//            override fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder =
+//                VehicleListViewHolder(view)
+//        }
 
         binding?.nextButton?.setOnClickListener { navigateToVehicleProfileFragment("ABCD12345") }
         binding?.createButton?.setOnClickListener { navigateToCreateProfile() }
