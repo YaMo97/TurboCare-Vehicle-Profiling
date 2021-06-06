@@ -15,9 +15,9 @@ interface LocalVehicleDataSource {
 
     suspend fun getVehicleProfilesList(): List<VehicleProfile>?
 
-    suspend fun saveVehicleProfilesList(vehicleProfileList: List<VehicleProfile>)
+    suspend fun saveVehicleProfilesList(vehicleProfileList: List<VehicleProfile>): Boolean
 
     suspend fun getVehicleProfileDetails(registrationNumber: String): VehicleProfile?
 
-    suspend fun saveVehicleProfileDetails(vehicleProfile: VehicleProfile)
+    suspend fun saveVehicleProfileDetails(vehicleProfile: VehicleProfile): Boolean
 }

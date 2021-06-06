@@ -14,4 +14,6 @@ interface RemoteVehicleDataSource {
 
     // Currently Returns Null
     suspend fun getVehicleProfileDetails(profileID: String): VehicleProfile?
+
+    suspend fun saveVehicleProfile(vehicleProfile: VehicleProfile): Boolean
 }

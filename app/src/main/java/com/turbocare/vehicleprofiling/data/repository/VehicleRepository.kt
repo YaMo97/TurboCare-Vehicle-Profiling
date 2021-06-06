@@ -12,4 +12,6 @@ interface VehicleRepository {
     suspend fun getVehicleProfilesList(): List<VehicleProfile>
 
     suspend fun getVehicleProfileDetails(registrationNumber: String): VehicleProfile?
+
+    suspend fun saveVehicleProfile(vehicleProfile: VehicleProfile): Boolean
 }

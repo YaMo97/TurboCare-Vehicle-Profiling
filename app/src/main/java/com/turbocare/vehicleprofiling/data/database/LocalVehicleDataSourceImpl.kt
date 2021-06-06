@@ -12,8 +12,6 @@ class LocalVehicleDataSourceImpl(
     appDatabase: AppDatabase
 ): LocalVehicleDataSource {
 
-    private val TAG = LocalVehicleDataSourceImpl::class.simpleName
-
     private val vehicleDao = appDatabase.vehicleDao()
 
     override suspend fun getListOfMakes(vehicleClass: VehicleClass): List<String>? {
@@ -86,23 +84,31 @@ class LocalVehicleDataSourceImpl(
         }
     }
 
-    override suspend fun saveVehicleProfilesList(vehicleProfileList: List<VehicleProfile>) {
+    override suspend fun saveVehicleProfilesList(vehicleProfileList: List<VehicleProfile>): Boolean {
         return withContext(Dispatchers.IO) {
             try {
-                // TODO("Implement in future for Caching")
+                vehicleDao.insertMultipleVehicleProfile(vehicleProfileList)
+                true
             } catch (e: Exception) {
                 Log.e(TAG, "Exception occurred: ${e.printStackTrace()}")
+                false
             }
         }
     }
 
-    override suspend fun saveVehicleProfileDetails(vehicleProfile: VehicleProfile) {
+    override suspend fun saveVehicleProfileDetails(vehicleProfile: VehicleProfile): Boolean {
         return withContext(Dispatchers.IO) {
             try {
-                // TODO("Implement in future for Caching")
+                vehicleDao.insertVehicleProfile(vehicleProfile)
+                true
             } catch (e: Exception) {
                 Log.e(TAG, "Exception occurred: ${e.printStackTrace()}")
+                false
             }
         }
+    }
+
+    companion object {
+        private val TAG = LocalVehicleDataSourceImpl::class.simpleName
     }
 }

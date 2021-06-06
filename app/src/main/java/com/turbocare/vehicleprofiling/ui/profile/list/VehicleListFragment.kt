@@ -52,7 +52,7 @@ class VehicleListFragment : Fragment() {
                 VehicleListViewHolder(view)
         }
 
-        binding?.nextButton?.setOnClickListener { navigateToNextStep() }
+        binding?.nextButton?.setOnClickListener { navigateToVehicleProfileFragment("ABCD12345") }
         binding?.createButton?.setOnClickListener { navigateToCreateProfile() }
     }
 
@@ -62,10 +62,11 @@ class VehicleListFragment : Fragment() {
         binding = null
     }
 
-    private fun navigateToNextStep() {
+
+    private fun navigateToVehicleProfileFragment(selectedRegistrationNumber: String) {
         findNavController().navigate(
             VehicleListFragmentDirections
-                .actionVehicleListFragmentToVehicleProfileFragment())
+                .actionVehicleListFragmentToVehicleProfileFragment(selectedRegistrationNumber))
     }
 
 

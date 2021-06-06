@@ -53,6 +53,12 @@ class RemoteVehicleDataSourceImpl : RemoteVehicleDataSource {
         return null
     }
 
+    override suspend fun saveVehicleProfile(vehicleProfile: VehicleProfile): Boolean {
+        // Currently does nothing as there's no such API
+
+        return true // Success
+    }
+
 
 
     companion object {

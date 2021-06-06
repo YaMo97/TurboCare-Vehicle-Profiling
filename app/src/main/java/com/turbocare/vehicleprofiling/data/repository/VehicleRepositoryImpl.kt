@@ -39,4 +39,11 @@ class VehicleRepositoryImpl(
             ?: remoteVehicleDataSource.getVehicleProfileDetails(registrationNumber)
                 ?.also { localVehicleDataSource.saveVehicleProfileDetails(it) }
     }
+
+    override suspend fun saveVehicleProfile(vehicleProfile: VehicleProfile): Boolean {
+
+        return localVehicleDataSource.saveVehicleProfileDetails(vehicleProfile)
+                && remoteVehicleDataSource.saveVehicleProfile(vehicleProfile)
+    }
+
 }

@@ -23,7 +23,11 @@
         android:id="@+id/vehicleProfileFragment"
         android:name="com.turbocare.vehicleprofiling.ui.profile.details.VehicleProfileFragment"
         android:label="@string/vehicle_profile_fragment"
-        tools:layout="@layout/vehicle_profile_fragment" />
+        tools:layout="@layout/vehicle_profile_fragment" >
+        <argument
+            android:name="registration-number"
+            app:argType="string" />
+    </fragment>
     <navigation android:id="@+id/create_profile_group"
         app:startDestination="@id/newVehicleFragment">
         <fragment

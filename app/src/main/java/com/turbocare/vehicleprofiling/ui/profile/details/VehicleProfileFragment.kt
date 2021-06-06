@@ -6,13 +6,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import com.turbocare.vehicleprofiling.R
+import com.turbocare.vehicleprofiling.data.model.VehicleProfile
+import com.turbocare.vehicleprofiling.databinding.VehicleMakeFragmentBinding
+import com.turbocare.vehicleprofiling.databinding.VehicleProfileFragmentBinding
 
 class VehicleProfileFragment : Fragment() {
 
     companion object {
-        fun newInstance() = VehicleProfileFragment()
+
+        const val PARAM_REGISTRATION_NUMBER = "registration-number"
+
+        fun newInstance(registrationNumber: String) = VehicleProfileFragment().apply {
+            arguments = Bundle().apply {
+                putString(PARAM_REGISTRATION_NUMBER, registrationNumber)
+            }
+        }
     }
+
+    private var binding: VehicleProfileFragmentBinding? = null
 
     private lateinit var viewModel: VehicleProfileViewModel
 
@@ -20,13 +34,37 @@ class VehicleProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.vehicle_profile_fragment, container, false)
+        binding = VehicleProfileFragmentBinding.inflate(inflater, container, false)
+
+        return binding?.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         viewModel = ViewModelProvider(this).get(VehicleProfileViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        setupObservers()
+
+        val registrationNumber = arguments?.getString(PARAM_REGISTRATION_NUMBER)
+        registrationNumber?.let {
+            viewModel.getVehicleProfile(it)
+        }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        binding = null
+    }
+
+    private fun setupObservers() {
+        viewModel.getVehicleProfileLiveData().observe(viewLifecycleOwner, { vehicleProfile ->
+
+            vehicleProfile?.run {
+                binding?.button?.text = vehicleProfile.displayName
+            }
+
+        })
+    }
 }

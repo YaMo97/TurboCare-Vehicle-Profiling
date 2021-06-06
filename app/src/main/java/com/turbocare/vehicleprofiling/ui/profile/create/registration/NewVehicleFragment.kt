@@ -13,8 +13,6 @@ class NewVehicleFragment : Fragment() {
 
     private var binding: NewVehicleFragmentBinding? = null
 
-    private lateinit var viewModel: NewVehicleViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,8 +24,6 @@ class NewVehicleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel = ViewModelProvider(this).get(NewVehicleViewModel::class.java)
 
         binding?.button?.setOnClickListener { navigateToNextStep() }
     }
