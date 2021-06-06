@@ -36,11 +36,13 @@ class VehicleListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(VehicleListViewModel::class.java)
+//
+//        val list = listOf(
+//            VehicleProfile("i20"),
+//            VehicleProfile("Swift")
+//        )
 
-        val list = listOf(
-            VehicleProfile("i20"),
-            VehicleProfile("Swift")
-        )
+        val list = emptyList<VehicleProfile>()
 
         var adapter = object : GenericRecyclerViewAdapter<VehicleProfile>(list) {
             override fun getLayoutId(position: Int, obj: VehicleProfile): Int =
