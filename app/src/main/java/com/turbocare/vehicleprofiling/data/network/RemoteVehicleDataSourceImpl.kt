@@ -1,5 +1,6 @@
 package com.turbocare.vehicleprofiling.data.network
 
+import android.util.Log
 import com.turbocare.vehicleprofiling.BuildConfig
 import com.turbocare.vehicleprofiling.data.datasource.RemoteVehicleDataSource
 import com.turbocare.vehicleprofiling.data.model.VehicleClass
@@ -17,9 +18,10 @@ class RemoteVehicleDataSourceImpl : RemoteVehicleDataSource {
 
         return withContext(Dispatchers.IO) {
             try {
-               API.getListOfMakes(vehicleClass = vehicleClass.value)
+                API.getListOfMakes(vehicleClass = vehicleClass.value)
             } catch (e: Exception) {
-               null
+                e.printStackTrace()
+                null
             }
         }
     }
@@ -33,6 +35,7 @@ class RemoteVehicleDataSourceImpl : RemoteVehicleDataSource {
             try {
                 API.getListOfModels(vehicleClass = vehicleClass.value, vehicleMake)
             } catch (e: Exception) {
+                e.printStackTrace()
                 null
             }
         }

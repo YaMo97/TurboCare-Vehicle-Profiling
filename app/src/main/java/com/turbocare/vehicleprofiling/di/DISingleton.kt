@@ -9,6 +9,7 @@ import com.turbocare.vehicleprofiling.data.datasource.RemoteVehicleDataSource
 import com.turbocare.vehicleprofiling.data.network.RemoteVehicleDataSourceImpl
 import com.turbocare.vehicleprofiling.data.repository.VehicleRepository
 import com.turbocare.vehicleprofiling.data.repository.VehicleRepositoryImpl
+import com.turbocare.vehicleprofiling.ui.base.ViewModelFactory
 
 
 /**
@@ -33,11 +34,12 @@ class DISingleton(applicationContext: Context) {
     private val remoteVehicleDataSource: RemoteVehicleDataSource = RemoteVehicleDataSourceImpl()
     private val localVehicleDataSource: LocalVehicleDataSource = LocalVehicleDataSourceImpl(appDatabase)
 
-    val vehicleRepository: VehicleRepository = VehicleRepositoryImpl(
+    private val vehicleRepository: VehicleRepository = VehicleRepositoryImpl(
         remoteVehicleDataSource,
         localVehicleDataSource
     )
 
+    val viewModelFactory = ViewModelFactory(vehicleRepository)
 
     companion object {
         private var instance: DISingleton? = null

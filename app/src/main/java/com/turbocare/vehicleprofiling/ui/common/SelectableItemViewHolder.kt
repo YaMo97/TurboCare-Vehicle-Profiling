@@ -4,14 +4,14 @@ import android.view.View
 import com.turbocare.vehicleprofiling.databinding.SelectableListItemBinding
 import com.turbocare.vehicleprofiling.ui.base.BaseRecyclerViewHolder
 
-class SelectableItemViewHolder(
+class SelectableItemViewHolder<T>(
     itemView: View,
     onItemClickListener: OnItemClickListener
-) : BaseRecyclerViewHolder<String>(itemView, onItemClickListener) {
+) : BaseRecyclerViewHolder<T>(itemView, onItemClickListener) {
 
     private val binding = SelectableListItemBinding.bind(itemView)
 
-    override fun bind(data: String) {
-        binding.option.text = data
+    override fun bind(data: T) {
+        binding.option.text = data.toString()
     }
 }

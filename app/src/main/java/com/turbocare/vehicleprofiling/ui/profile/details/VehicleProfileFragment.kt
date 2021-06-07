@@ -12,6 +12,8 @@ import com.turbocare.vehicleprofiling.R
 import com.turbocare.vehicleprofiling.data.model.VehicleProfile
 import com.turbocare.vehicleprofiling.databinding.VehicleMakeFragmentBinding
 import com.turbocare.vehicleprofiling.databinding.VehicleProfileFragmentBinding
+import com.turbocare.vehicleprofiling.ui.profile.list.VehicleListViewModel
+import com.turbocare.vehicleprofiling.util.getViewModel
 
 class VehicleProfileFragment : Fragment() {
 
@@ -42,7 +44,7 @@ class VehicleProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(VehicleProfileViewModel::class.java)
+        viewModel = getViewModel(VehicleProfileViewModel::class.java)
 
         setupObservers()
 

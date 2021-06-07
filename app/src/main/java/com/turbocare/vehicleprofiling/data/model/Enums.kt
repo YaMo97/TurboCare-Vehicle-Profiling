@@ -5,14 +5,18 @@ enum class VehicleClass(
     var value: String
 ) {
     TWO_WHEELER("Two Wheeler", "2w"),
-    FOUR_WHEELER("Four Wheeler", "4w")
+    FOUR_WHEELER("Four Wheeler", "4w");
+
+    override fun toString() = displayString
 }
 
 enum class Transmission(
     var displayString: String
 ) {
     MANUAL("Manual"),
-    AUTOMATIC("Automatic")
+    AUTOMATIC("Automatic");
+
+    override fun toString() = displayString
 }
 
 enum class FuelType(
@@ -23,5 +27,7 @@ enum class FuelType(
     CNG("CNG"),
     PETROL_CNG("Petrol + CNG"),
     ELECTRIC("Electric"),
-    HYBRID("Hybrid")
+    HYBRID("Hybrid");
+
+    override fun toString() = displayString
 }

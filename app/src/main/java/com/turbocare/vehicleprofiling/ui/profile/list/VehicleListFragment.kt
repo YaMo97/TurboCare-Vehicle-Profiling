@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.turbocare.vehicleprofiling.R
 import com.turbocare.vehicleprofiling.data.model.VehicleProfile
 import com.turbocare.vehicleprofiling.databinding.VehicleListFragmentBinding
+import com.turbocare.vehicleprofiling.di.DISingleton
 import com.turbocare.vehicleprofiling.ui.base.GenericRecyclerViewAdapter
+import com.turbocare.vehicleprofiling.util.getViewModel
 
 class VehicleListFragment : Fragment() {
 
@@ -35,7 +37,7 @@ class VehicleListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(VehicleListViewModel::class.java)
+        viewModel = getViewModel(VehicleListViewModel::class.java)
 //
 //        val list = listOf(
 //            VehicleProfile("i20"),

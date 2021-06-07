@@ -20,6 +20,7 @@ import com.turbocare.vehicleprofiling.ui.base.GenericRecyclerViewAdapter
 import com.turbocare.vehicleprofiling.ui.common.SelectableItemViewHolder
 import com.turbocare.vehicleprofiling.ui.profile.create.CreateProfileViewModel
 import com.turbocare.vehicleprofiling.ui.profile.list.VehicleListViewHolder
+import com.turbocare.vehicleprofiling.util.getViewModel
 import java.text.FieldPosition
 
 class VehicleFuelTypeFragment : Fragment() {
@@ -29,7 +30,7 @@ class VehicleFuelTypeFragment : Fragment() {
 
     private var binding: VehicleFuelTypeFragmentBinding? = null
 
-    private var listOfItems: List<String> = enumValues<FuelType>().map { it.displayString }
+    private var listOfItems: List<FuelType> = enumValues<FuelType>().toList()
 
 
     override fun onCreateView(
@@ -44,16 +45,16 @@ class VehicleFuelTypeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(CreateProfileViewModel::class.java)
+        viewModel = requireActivity().getViewModel(CreateProfileViewModel::class.java)
 
         binding?.recyclerView?.recyclerView?.let {
             it.layoutManager = LinearLayoutManager(context)
-            it.adapter = object : GenericRecyclerViewAdapter<String>(listOfItems) {
-                override fun getLayoutId(position: Int, obj: String): Int =
+            it.adapter = object : GenericRecyclerViewAdapter<FuelType>(listOfItems) {
+                override fun getLayoutId(position: Int, obj: FuelType): Int =
                     R.layout.selectable_list_item
 
                 override fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder =
-                    SelectableItemViewHolder(view, itemClickListener)
+                    SelectableItemViewHolder<FuelType>(view, itemClickListener)
             }
         }
     }
@@ -67,7 +68,7 @@ class VehicleFuelTypeFragment : Fragment() {
     private val itemClickListener = object : BaseRecyclerViewHolder.OnItemClickListener {
         override fun onItemClicked(position: Int) {
 
-            viewModel.newVehicleProfile.fuelType = FuelType.valueOf(listOfItems[position])
+            viewModel.newVehicleProfile.fuelType = listOfItems[position]
 
             Log.d(TAG, "onItemClicked: Vehicle Profile = ${viewModel.newVehicleProfile}")
 
