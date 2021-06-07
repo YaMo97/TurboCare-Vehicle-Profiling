@@ -17,7 +17,7 @@
         android:textAllCaps="true"
         android:gravity="center"
 
-        android:text="Make"
+        android:text="@string/make_label"
         />
 
     <TextView
@@ -33,6 +33,6 @@
         android:textStyle="bold"
         android:gravity="center"
 
-        android:text="Honda"
+        tools:text="Honda"
         />
 </LinearLayout>

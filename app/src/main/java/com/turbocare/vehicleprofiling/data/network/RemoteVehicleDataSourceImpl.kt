@@ -1,6 +1,5 @@
 package com.turbocare.vehicleprofiling.data.network
 
-import android.util.Log
 import com.turbocare.vehicleprofiling.BuildConfig
 import com.turbocare.vehicleprofiling.data.datasource.RemoteVehicleDataSource
 import com.turbocare.vehicleprofiling.data.model.VehicleClass

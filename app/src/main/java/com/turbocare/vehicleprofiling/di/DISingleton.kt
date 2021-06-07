@@ -52,6 +52,6 @@ class DISingleton(applicationContext: Context) {
         }
 
         fun getInstance(): DISingleton = instance
-            ?: throw NullPointerException("Please call initialize() before getting the instance.");
+            ?: throw NullPointerException("Please call initialize() before getting the instance.")
     }
 }

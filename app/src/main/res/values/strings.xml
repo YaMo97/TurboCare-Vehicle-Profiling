@@ -23,4 +23,5 @@
     <string name="model_label">Model</string>
     <string name="fuel_type_label">Fuel Type</string>
     <string name="transmission_label">Transmission</string>
+    <string name="forward_arrow_desc">Forward Arrow</string>
 </resources>

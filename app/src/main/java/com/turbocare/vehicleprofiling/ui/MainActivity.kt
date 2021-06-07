@@ -1,16 +1,11 @@
 package com.turbocare.vehicleprofiling.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.widget.Toolbar
-
-import androidx.navigation.findNavController
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.turbocare.vehicleprofiling.R
 import com.turbocare.vehicleprofiling.databinding.MainActivityBinding
 
