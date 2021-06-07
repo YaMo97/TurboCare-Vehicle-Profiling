@@ -24,6 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
 
         android:text="@string/no_profile_found"
+        android:gravity="center"
         android:textAllCaps="true"
         android:visibility="gone"
         />

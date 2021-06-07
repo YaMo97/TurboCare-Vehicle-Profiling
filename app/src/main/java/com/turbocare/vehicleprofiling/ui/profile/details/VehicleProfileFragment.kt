@@ -1,32 +1,18 @@
 package com.turbocare.vehicleprofiling.ui.profile.details
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import com.turbocare.vehicleprofiling.R
-import com.turbocare.vehicleprofiling.data.model.VehicleProfile
-import com.turbocare.vehicleprofiling.databinding.VehicleMakeFragmentBinding
 import com.turbocare.vehicleprofiling.databinding.VehicleProfileFragmentBinding
-import com.turbocare.vehicleprofiling.ui.profile.list.VehicleListViewModel
+import com.turbocare.vehicleprofiling.ui.MainActivity
 import com.turbocare.vehicleprofiling.util.getViewModel
 
 class VehicleProfileFragment : Fragment() {
-
-    companion object {
-
-        const val PARAM_REGISTRATION_NUMBER = "registration-number"
-
-        fun newInstance(registrationNumber: String) = VehicleProfileFragment().apply {
-            arguments = Bundle().apply {
-                putString(PARAM_REGISTRATION_NUMBER, registrationNumber)
-            }
-        }
-    }
 
     private var binding: VehicleProfileFragmentBinding? = null
 
@@ -37,6 +23,11 @@ class VehicleProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = VehicleProfileFragmentBinding.inflate(inflater, container, false)
+
+        binding?.makeLayout?.title?.text = getString(R.string.make_label)
+        binding?.modelLayout?.title?.text = getString(R.string.model_label)
+        binding?.fuelTypeLayout?.title?.text = getString(R.string.fuel_type_label)
+        binding?.transmissionLayout?.title?.text = getString(R.string.transmission_label)
 
         return binding?.root
     }
@@ -64,9 +55,28 @@ class VehicleProfileFragment : Fragment() {
         viewModel.getVehicleProfileLiveData().observe(viewLifecycleOwner, { vehicleProfile ->
 
             vehicleProfile?.run {
-                binding?.button?.text = vehicleProfile.getDisplayName()
-            }
 
+                (activity as MainActivity?)?.binding?.collapsingToolbarLayout?.let {
+                    Log.d("Toolbar", "setupObservers: Setting Title to ${getDisplayName().uppercase()}")
+                    it.title = getDisplayName().uppercase()
+                }
+
+                binding?.makeLayout?.value?.text = make
+                binding?.modelLayout?.value?.text = model
+                binding?.fuelTypeLayout?.value?.text = fuelType?.displayString
+                binding?.transmissionLayout?.value?.text = transmission?.displayString
+            }
         })
+    }
+
+    companion object {
+
+        const val PARAM_REGISTRATION_NUMBER = "registration-number"
+
+        fun newInstance(registrationNumber: String) = VehicleProfileFragment().apply {
+            arguments = Bundle().apply {
+                putString(PARAM_REGISTRATION_NUMBER, registrationNumber)
+            }
+        }
     }
 }
