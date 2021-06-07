@@ -1,5 +1,6 @@
 # Vehicle Profiling
 An Android app which to create vehicle profiles and save them locally in a db on device storage.
+
 Made for TurboCare test Assignment as per this [guide](https://docs.google.com/document/d/1-pziB-_kwkbDISvTQgz1Bu1FEDYIVPexeGbha_2x69Q/edit).
 
 
@@ -19,7 +20,7 @@ The App showcases following features and skillsets: -
 10. Use of Generics and Base classes to reduce redundant code. For eg. use of a single Generic RecyclerView Adapter for all screens, instead of making one for each.
 11. Use of ViewBinding.
 
-Jetpack Components used as follows :- 
+### Jetpack Components used as follows :- 
 1. Room Database
 2. ViewModel and LiveData
 3. NavigationUI (NavController and Navigation Graphs) and Safe-Args
