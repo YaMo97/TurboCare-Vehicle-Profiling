@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import com.turbocare.vehicleprofiling.R
 import com.turbocare.vehicleprofiling.databinding.VehicleProfileFragmentBinding
 import com.turbocare.vehicleprofiling.ui.MainActivity
@@ -56,9 +55,12 @@ class VehicleProfileFragment : Fragment() {
 
             vehicleProfile?.run {
 
-                (activity as MainActivity?)?.binding?.collapsingToolbarLayout?.let {
+                (activity as MainActivity?)?.binding?.appBarLayout?.let {
+
                     Log.d("Toolbar", "setupObservers: Setting Title to ${getDisplayName().uppercase()}")
-                    it.title = getDisplayName().uppercase()
+
+                    it.collapsingToolbarLayout.title = getDisplayName().uppercase()
+                    it.registrationNumberSubtitle.text = registrationNumber
                 }
 
                 binding?.makeLayout?.value?.text = make

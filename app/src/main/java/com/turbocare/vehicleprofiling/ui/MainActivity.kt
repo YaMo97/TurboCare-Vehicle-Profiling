@@ -2,6 +2,7 @@ package com.turbocare.vehicleprofiling.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 
 import androidx.navigation.findNavController
@@ -32,14 +33,20 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         val appBarConfiguration = AppBarConfiguration(navGraph = navController.graph)
 
-        binding.collapsingToolbarLayout
-            .setupWithNavController(binding.toolbar, navController, appBarConfiguration)
+        binding.appBarLayout.collapsingToolbarLayout
+            .setupWithNavController(binding.appBarLayout.toolbar, navController, appBarConfiguration)
 
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.vehicleProfileFragment -> binding.appBarLayout.setExpanded(true)
-                else -> binding.appBarLayout.setExpanded(false)
+                R.id.vehicleProfileFragment -> {
+                    binding.appBarLayout.appBar.setExpanded(true)
+                    binding.appBarLayout.registrationNumberSubtitle.visibility = View.VISIBLE
+                }
+                else -> {
+                    binding.appBarLayout.appBar.setExpanded(false)
+                    binding.appBarLayout.registrationNumberSubtitle.visibility = View.GONE
+                }
             }
         }
     }

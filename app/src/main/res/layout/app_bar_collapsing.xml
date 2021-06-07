@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/app_bar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/tall_toolbar_height"
+    android:theme="@style/Theme.VehicleProfiling.AppBarOverlay" >
+
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:id="@+id/collapsing_toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:contentScrim="?attr/colorPrimary"
+        app:expandedTitleGravity="bottom"
+        app:expandedTitleMarginBottom="44dp"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+        <TextView
+            android:id="@+id/registrationNumberSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="36dp"
+
+            style="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textAllCaps="true"
+
+            app:layout_collapseMode="parallax"
+
+            android:layout_gravity="bottom" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_collapseMode="pin"
+            app:popupTheme="@style/Theme.VehicleProfiling.PopupOverlay" />
+
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+</com.google.android.material.appbar.AppBarLayout>
