@@ -64,7 +64,7 @@ class VehicleProfileFragment : Fragment() {
         viewModel.getVehicleProfileLiveData().observe(viewLifecycleOwner, { vehicleProfile ->
 
             vehicleProfile?.run {
-                binding?.button?.text = vehicleProfile.displayName
+                binding?.button?.text = vehicleProfile.getDisplayName()
             }
 
         })

@@ -14,5 +14,5 @@ data class VehicleProfile(
     var fuelType: FuelType? = null,
     var transmission: Transmission? = null
 ) {
-    var displayName = "$model $fuelType"
+    fun getDisplayName() ="$model $fuelType"
 }

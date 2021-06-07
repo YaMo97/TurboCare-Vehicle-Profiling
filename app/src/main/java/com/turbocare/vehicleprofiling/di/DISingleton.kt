@@ -28,7 +28,8 @@ class DISingleton(applicationContext: Context) {
         applicationContext,
         AppDatabase::class.java,
         "vehicles-db"
-    ).build()
+    )   .fallbackToDestructiveMigration()
+        .build()
 
 
     private val remoteVehicleDataSource: RemoteVehicleDataSource = RemoteVehicleDataSourceImpl()

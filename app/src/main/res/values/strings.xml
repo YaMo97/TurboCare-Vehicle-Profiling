@@ -10,4 +10,8 @@
     <string name="vehicle_model_fragment">Select Model</string>
     <string name="vehicle_fuel_type_fragment">Select Fuel Type</string>
     <string name="vehicle_transmission_fragment">Select Transmission</string>
+    <string name="next_button_desc">Next Button</string>
+    <string name="vehicle_number_label">Vehicle Number</string>
+    <string name="hint_enter_vehicle_number">Enter Vehicle Registration Number</string>
+    <string name="error_enter_vehicle_number">Please input vehicle registration number</string>
 </resources>
