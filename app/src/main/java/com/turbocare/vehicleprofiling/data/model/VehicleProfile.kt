@@ -15,4 +15,5 @@ data class VehicleProfile(
     var transmission: Transmission? = null
 ) {
     fun getDisplayName() ="$model $fuelType"
+    fun getVehicleName() ="$make $model"
 }

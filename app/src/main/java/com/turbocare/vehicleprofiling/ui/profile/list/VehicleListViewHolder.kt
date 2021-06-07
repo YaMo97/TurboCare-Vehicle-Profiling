@@ -4,14 +4,16 @@ import android.view.View
 import android.widget.TextView
 import com.turbocare.vehicleprofiling.R
 import com.turbocare.vehicleprofiling.data.model.VehicleProfile
+import com.turbocare.vehicleprofiling.databinding.VehicleListItemBinding
 import com.turbocare.vehicleprofiling.ui.base.BaseRecyclerViewHolder
 
 class VehicleListViewHolder(itemView: View, onItemClickListener: OnItemClickListener)
     : BaseRecyclerViewHolder<VehicleProfile>(itemView, onItemClickListener) {
 
-//    private val textView: TextView = itemView.findViewById(R.id.item_layout_text)
+    private val binding = VehicleListItemBinding.bind(itemView)
 
     override fun bind(data: VehicleProfile) {
-        TODO("Not yet implemented")
+        binding.registrationNumber.text = data.registrationNumber
+        binding.vehicleName.text = data.getVehicleName()
     }
 }

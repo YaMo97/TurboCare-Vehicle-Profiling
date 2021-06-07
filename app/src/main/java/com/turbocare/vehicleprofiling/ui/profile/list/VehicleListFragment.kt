@@ -1,29 +1,36 @@
 package com.turbocare.vehicleprofiling.ui.profile.list
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.turbocare.vehicleprofiling.R
 import com.turbocare.vehicleprofiling.data.model.VehicleProfile
 import com.turbocare.vehicleprofiling.databinding.VehicleListFragmentBinding
-import com.turbocare.vehicleprofiling.di.DISingleton
+import com.turbocare.vehicleprofiling.ui.base.BaseRecyclerViewHolder
 import com.turbocare.vehicleprofiling.ui.base.GenericRecyclerViewAdapter
 import com.turbocare.vehicleprofiling.util.getViewModel
 
 class VehicleListFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = VehicleListFragment()
-    }
+    private lateinit var viewModel: VehicleListViewModel
 
     private var binding: VehicleListFragmentBinding? = null
 
-    private lateinit var viewModel: VehicleListViewModel
+    private var listOfItems = emptyList<VehicleProfile>()
+
+    private var adapter =  object : GenericRecyclerViewAdapter<VehicleProfile>() {
+        override fun getLayoutId(position: Int, obj: VehicleProfile): Int =
+            R.layout.vehicle_list_item
+
+        override fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder =
+            VehicleListViewHolder(view, itemClickListener)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,24 +45,16 @@ class VehicleListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = getViewModel(VehicleListViewModel::class.java)
-//
-//        val list = listOf(
-//            VehicleProfile("i20"),
-//            VehicleProfile("Swift")
-//        )
 
-        val list = emptyList<VehicleProfile>()
+        setupObservers()
 
-//        var adapter = object : GenericRecyclerViewAdapter<VehicleProfile>(list) {
-//            override fun getLayoutId(position: Int, obj: VehicleProfile): Int =
-//                R.layout.vehicle_list_fragment
-//
-//            override fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder =
-//                VehicleListViewHolder(view)
-//        }
+        binding?.createProfileButton?.setOnClickListener { navigateToCreateProfile() }
+        binding?.recyclerView?.recyclerView?.let {
+            it.layoutManager = LinearLayoutManager(context)
+            it.adapter = adapter
+        }
 
-        binding?.nextButton?.setOnClickListener { navigateToVehicleProfileFragment("ABCD12345") }
-        binding?.createButton?.setOnClickListener { navigateToCreateProfile() }
+        viewModel.refreshVehicleList()
     }
 
     override fun onDestroyView() {
@@ -64,6 +63,33 @@ class VehicleListFragment : Fragment() {
         binding = null
     }
 
+
+    private val itemClickListener = object : BaseRecyclerViewHolder.OnItemClickListener {
+        override fun onItemClicked(position: Int) {
+
+            val vehicleProfile: VehicleProfile = listOfItems[position]
+
+            Log.d(TAG, "onItemClicked: Vehicle Profile = $vehicleProfile")
+
+            navigateToVehicleProfileFragment(vehicleProfile.registrationNumber)
+        }
+    }
+
+    private fun setupObservers() {
+        viewModel.getVehicleListLiveData().observe(viewLifecycleOwner) { listOfVehicles ->
+            listOfItems = listOfVehicles
+
+            adapter.setItems(listOfItems)
+
+            if (listOfVehicles.isEmpty()) {
+                binding?.recyclerView?.recyclerView?.visibility = View.GONE
+                binding?.noItemsWarning?.visibility = View.VISIBLE
+            } else {
+                binding?.recyclerView?.recyclerView?.visibility = View.VISIBLE
+                binding?.noItemsWarning?.visibility = View.GONE
+            }
+        }
+    }
 
     private fun navigateToVehicleProfileFragment(selectedRegistrationNumber: String) {
         findNavController().navigate(
@@ -76,5 +102,11 @@ class VehicleListFragment : Fragment() {
         findNavController().navigate(
             VehicleListFragmentDirections
                 .actionVehicleListFragmentToCreateProfileGroup())
+    }
+
+    companion object {
+        private val TAG = VehicleListFragment::class.simpleName
+
+        fun newInstance() = VehicleListFragment()
     }
 }

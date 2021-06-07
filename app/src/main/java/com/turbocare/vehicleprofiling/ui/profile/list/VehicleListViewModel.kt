@@ -14,10 +14,10 @@ class VehicleListViewModel(private val vehicleRepository: VehicleRepository) : V
 
     fun refreshVehicleList() {
         viewModelScope.launch {
-            vehicleListLiveData.postValue(vehicleRepository.getVehicleProfilesList())
+            vehicleListLiveData.value = vehicleRepository.getVehicleProfilesList()
         }
     }
 
-    private fun getVehicleListLiveData() : LiveData<List<VehicleProfile>> =
+    fun getVehicleListLiveData() : LiveData<List<VehicleProfile>> =
         vehicleListLiveData
 }
